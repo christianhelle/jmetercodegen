@@ -1,13 +1,13 @@
-﻿using Microsoft;
+﻿using System.Diagnostics;
+using Microsoft;
 using Microsoft.VisualStudio.Extensibility;
 using Microsoft.VisualStudio.Extensibility.Commands;
 using Microsoft.VisualStudio.Extensibility.Definitions;
-using System.Diagnostics;
 
-namespace ChristianHelle.DeveloperTools.CodeGenerators.JMeter.VSIX
+namespace ChristianHelle.DeveloperTools.CodeGenerators.JMeter.Extension
 {
     [CommandIcon(KnownMonikers.Extension, IconSettings.IconAndText)]
-    [Command("JMeterCodeGen.VSIX.GenerateTestPlanCommand", "Generate JMeter Test Plan", placement: CommandPlacement.ToolsMenu)]
+    [Command("JMeterCodeGen.ExtensionContainer.GenerateTestPlanCommand", "Generate JMeter Test Plan", placement: CommandPlacement.ToolsMenu)]
     [CommandVisibleWhen(
         expression: "SolutionLoaded & IsValidFile",
         termNames: new string[] { "SolutionLoaded", "IsValidFile" },
