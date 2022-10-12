@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
+﻿using ChristianHelle.DeveloperTools.CodeGenerators.JMeter.Core;
+using Community.VisualStudio.Toolkit;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.ComponentModel.Design;
-using System.Globalization;
 using Task = System.Threading.Tasks.Task;
 
 namespace JMeterCodeGen.VSIX
@@ -85,20 +85,18 @@ namespace JMeterCodeGen.VSIX
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event args.</param>
-        private void Execute(object sender, EventArgs e)
+        private async void Execute(object sender, EventArgs e)
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "GenerateTestPlansCommand";
+            await OnExecute();
+        }
 
-            // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.package,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+        private static async Task OnExecute()
+        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            var project = await VS.Solutions.GetActiveProjectAsync();
+            await project.BuildAsync();
+
+            new SwaggerFileGenerator().BuildSwaggerFile(project.FullPath);
         }
     }
 }
