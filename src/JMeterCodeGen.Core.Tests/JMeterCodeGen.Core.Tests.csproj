@@ -9,6 +9,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Sample\Program.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Sample\Properties\launchSettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Include="Sample\Sample.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
         <PackageReference Include="xunit" Version="2.4.2" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -23,6 +35,18 @@
 
     <ItemGroup>
       <ProjectReference Include="..\JMeterCodeGen.Core\JMeterCodeGen.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Sample\Program.cs">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Sample\Properties\launchSettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Sample\Sample.csproj">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>

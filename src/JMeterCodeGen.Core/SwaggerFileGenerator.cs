@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -6,16 +7,44 @@ using Microsoft.OpenApi.Writers;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Reflection;
 using System.Runtime.Loader;
+using System.Xml.Linq;
 
 namespace ChristianHelle.DeveloperTools.CodeGenerators.JMeter.Core;
 
 public class SwaggerFileGenerator
 {
+    public string BuildProject(string projectFilepath)
+    {
+        var process = Process.Start("dotnet build", projectFilepath);
+        process!.WaitForExit();
+        
+        if (process.ExitCode != 0)
+        {
+            throw new Exception("Failed to build project");
+        }
+
+        XNamespace xmlns = "http://schemas.microsoft.com/developer/msbuild/2003";
+        var projDefinition = XDocument.Load(projectFilepath);
+ 
+        var assemblyResultsEnumerable = projDefinition
+            .Element(xmlns + "Project")
+            .Elements(xmlns + "PropertyGroup")
+            .Elements(xmlns + "AssemblyName").Nodes<XContainer>();
+ 
+        var assemblyResults = new List<XNode>(assemblyResultsEnumerable);
+        if(assemblyResults.Count == 0)
+        {
+            throw new Exception($"The project file isn't correctly structured: [{projectFilepath}]");
+        }
+ 
+        string assemblyName = assemblyResults[0].ToString();
+    }
+
     public string BuildSwaggerFile(string startupAssemblyPath, string swaggerFile = "v1")
     {
         // 1) Configure host with provided startupassembly
         var startupAssembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(
-                        Path.Combine(Directory.GetCurrentDirectory(), startupAssemblyPath));
+            Path.Combine(Directory.GetCurrentDirectory(), startupAssemblyPath));
 
         // 2) Build a service container that's based on the startup assembly
         var serviceProvider = GetServiceProvider(startupAssembly);
@@ -53,9 +82,9 @@ public class SwaggerFileGenerator
         try
         {
             return WebHost.CreateDefaultBuilder()
-               .UseStartup(startupAssembly.GetName().Name)
-               .Build()
-               .Services;
+                .UseStartup(startupAssembly.GetName().Name)
+                .Build()
+                .Services;
         }
         catch
         {
