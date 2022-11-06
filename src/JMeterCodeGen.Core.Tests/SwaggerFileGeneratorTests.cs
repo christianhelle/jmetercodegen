@@ -8,7 +8,7 @@ public class SwaggerFileGeneratorTests
     public void GenerateTest()
     {
         var sut = new SwaggerFileGenerator();
-        var swaggerFile = sut.BuildProject()
+        var swaggerFile = sut.BuildProject("");
         Assert.NotNull(swaggerFile);
     }
 }
