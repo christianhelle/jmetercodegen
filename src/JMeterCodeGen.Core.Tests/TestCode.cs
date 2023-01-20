@@ -3,14 +3,14 @@ namespace JMeterCodeGen.Core.Tests;
 public sealed class TestCode
 {
     public const string CSProj = @"
-<Project Sdk=\""Microsoft.NET.Sdk.Web\"">
+<Project Sdk=""Microsoft.NET.Sdk.Web"">
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include=\""Swashbuckle.AspNetCore\"" Version=\""6.2.3\"" />
+        <PackageReference Include=""Swashbuckle.AspNetCore"" Version=""6.2.3"" />
     </ItemGroup>
 </Project>
 ";
@@ -24,22 +24,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 var summaries = new[]
 {
-    \""Freezing\"", \""Bracing\"", \""Chilly\"", \""Cool\"", \""Mild\"", \""Warm\"", \""Balmy\"", \""Hot\"", \""Sweltering\"", \""Scorching\""
+    ""Freezing"", ""Bracing"", ""Chilly"", ""Cool"", ""Mild"", ""Warm"", ""Balmy"", ""Hot"", ""Sweltering"", ""Scorching""
 };
 
-app.MapGet(\""/weatherforecast\"", () =>
+app.MapGet(""/weatherforecast"", () =>
     {
         var forecast = Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecast
@@ -51,7 +44,7 @@ app.MapGet(\""/weatherforecast\"", () =>
             .ToArray();
         return forecast;
     })
-    .WithName(\""GetWeatherForecast\"");
+    .WithName(""GetWeatherForecast"");
 
 app.Run();
 
@@ -63,35 +56,35 @@ internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary
     
     public const string LaunchSettings = @"
 {
-  \""$schema\"": \""https://json.schemastore.org/launchsettings.json\"",
-    \""iisSettings\"": {
-        \""windowsAuthentication\"": false,
-        \""anonymousAuthentication\"": true,
-        \""iisExpress\"": {
-            \""applicationUrl\"": \""http://localhost:63079\"",
-            \""sslPort\"": 44381
+  ""$schema"": ""https://json.schemastore.org/launchsettings.json"",
+    ""iisSettings"": {
+        ""windowsAuthentication"": false,
+        ""anonymousAuthentication"": true,
+        ""iisExpress"": {
+            ""applicationUrl"": ""http://localhost:63079"",
+            ""sslPort"": 44381
         }
     },
-\""profiles\"": {
-    \""API\"": {
-        \""commandName\"": \""Project\"",
-        \""dotnetRunMessages\"": true,
-        \""launchBrowser\"": true,
-        \""launchUrl\"": \""swagger\"",
-        \""applicationUrl\"": \""https://localhost:5001;http://localhost:5000\"",
-        \""environmentVariables\"": {
-            \""ASPNETCORE_ENVIRONMENT\"": \""Development\""
-        }
-    },
-    \""IIS Express\"": {
-        \""commandName\"": \""IISExpress\"",
-        \""launchBrowser\"": true,
-        \""launchUrl\"": \""swagger\"",
-        \""environmentVariables\"": {
-            \""ASPNETCORE_ENVIRONMENT\"": \""Development\""
+    ""profiles"": {
+        ""API"": {
+            ""commandName"": ""Project"",
+            ""dotnetRunMessages"": true,
+            ""launchBrowser"": true,
+            ""launchUrl"": ""swagger"",
+            ""applicationUrl"": ""https://localhost:5001;http://localhost:5000"",
+            ""environmentVariables"": {
+                ""ASPNETCORE_ENVIRONMENT"": ""Development""
+            }
+        },
+        ""IIS Express"": {
+            ""commandName"": ""IISExpress"",
+            ""launchBrowser"": true,
+            ""launchUrl"": ""swagger"",
+            ""environmentVariables"": {
+                ""ASPNETCORE_ENVIRONMENT"": ""Development""
+            }
         }
     }
-  }
 }
 ";
 }
