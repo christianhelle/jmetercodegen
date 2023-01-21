@@ -96,7 +96,7 @@ namespace JMeterCodeGen.VSIX
             var project = await VS.Solutions.GetActiveProjectAsync();
             await project.BuildAsync();
 
-            new SwaggerFileGenerator().BuildSwaggerFile(project.FullPath);
+            new SwaggerFileGenerator().LaunchAndGetSwaggerFile(project.FullPath);
         }
     }
 }
