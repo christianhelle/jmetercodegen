@@ -21,9 +21,16 @@ public class SwaggerFileGenerator
             Arguments = $"run --project {projectFilepath} --urls=http://localhost:54321",
         };
         process.Start();
-        
-        using var client = new WebClient();
-        var swaggerSpec = client.DownloadString("http://localhost:54321/swagger/v1/swagger.json");
-        return swaggerSpec;
+
+        try
+        {
+            using var client = new WebClient();
+            var swaggerSpec = client.DownloadString("http://localhost:54321/swagger/v1/swagger.json");
+            return swaggerSpec;
+        }
+        finally
+        {
+            process.Kill();
+        }
     }
 }
