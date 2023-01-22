@@ -13,7 +13,6 @@ public class SwaggerFileGeneratorTests
         var csproj = Path.Combine(folder, "Sample.csproj");
         File.WriteAllText(csproj, TestCode.CSProj);
         File.WriteAllText(Path.Combine(folder, "Program.cs"), TestCode.CSharp);
-        File.WriteAllText(Path.Combine(folder, "launchsettings.json"), TestCode.LaunchSettings);
 
         var sut = new SwaggerFileGenerator();
         var swaggerFile = sut.LaunchAndGetSwaggerFile(csproj);

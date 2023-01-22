@@ -53,38 +53,4 @@ internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
 ";
-    
-    public const string LaunchSettings = @"
-{
-  ""$schema"": ""https://json.schemastore.org/launchsettings.json"",
-    ""iisSettings"": {
-        ""windowsAuthentication"": false,
-        ""anonymousAuthentication"": true,
-        ""iisExpress"": {
-            ""applicationUrl"": ""http://localhost:63079"",
-            ""sslPort"": 44381
-        }
-    },
-    ""profiles"": {
-        ""API"": {
-            ""commandName"": ""Project"",
-            ""dotnetRunMessages"": true,
-            ""launchBrowser"": true,
-            ""launchUrl"": ""swagger"",
-            ""applicationUrl"": ""https://localhost:5001;http://localhost:5000"",
-            ""environmentVariables"": {
-                ""ASPNETCORE_ENVIRONMENT"": ""Development""
-            }
-        },
-        ""IIS Express"": {
-            ""commandName"": ""IISExpress"",
-            ""launchBrowser"": true,
-            ""launchUrl"": ""swagger"",
-            ""environmentVariables"": {
-                ""ASPNETCORE_ENVIRONMENT"": ""Development""
-            }
-        }
-    }
-}
-";
 }
