@@ -3,6 +3,7 @@ using Community.VisualStudio.Toolkit;
 using Microsoft.VisualStudio.Shell;
 using System;
 using System.ComponentModel.Design;
+using System.IO;
 using Task = System.Threading.Tasks.Task;
 
 namespace JMeterCodeGen.VSIX
@@ -94,9 +95,12 @@ namespace JMeterCodeGen.VSIX
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
             var project = await VS.Solutions.GetActiveProjectAsync();
-            await project.BuildAsync();
+            string projectFullPath = project.FullPath;
 
-            new SwaggerFileGenerator().LaunchAndGetSwaggerFile(project.FullPath);
+            var swaggerSpec = await Task.Run(() => SwaggerFileGenerator.LaunchAndGetSwaggerFile(projectFullPath));
+            var swaggerSpecPath = Path.Combine(Path.GetDirectoryName(projectFullPath), "swagger.json");
+            await Task.Run(() => File.WriteAllText(swaggerSpecPath, swaggerSpec));
+            await Task.Run(() => JMeterScriptGenerator.Generate(swaggerSpecPath, Path.Combine(swaggerSpecPath, "JMeter")));
         }
     }
 }
