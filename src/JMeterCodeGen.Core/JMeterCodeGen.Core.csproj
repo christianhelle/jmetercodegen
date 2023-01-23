@@ -13,16 +13,6 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="6.0.0" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-    <PackageReference Include="Rapicgen.Core" Version="1.6.89" />
-  </ItemGroup>  
-
-  <ItemGroup>
-    <PackageReference Include="Exceptionless" Version="4.8.0" />
-    <PackageReference Include="ICSharpCode.CodeConverter" Version="9.1.2.564" />
-    <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer" Version="2.21.0" />
-    <PackageReference Include="NSwag.Core.Yaml" Version="13.18.2" />
-    <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="13.18.2" />
-    <PackageReference Include="Polly" Version="7.2.3" />
   </ItemGroup>
 
 </Project>
