@@ -1,23 +1,42 @@
-﻿using Rapicgen.Core.Generators;
-using Rapicgen.Core.Generators.OpenApi;
-using Rapicgen.Core.Installer;
-using Rapicgen.Core.Options.General;
+﻿using System.Diagnostics;
 
 namespace ChristianHelle.DeveloperTools.CodeGenerators.JMeter.Core;
 
-public class JMeterScriptGenerator
+public static class JMeterScriptGenerator
 {
-    public void Generate(string swaggerFilePath, string outputDirectory)
+    public static void Generate(string swaggerFilePath, string outputDirectory)
     {
-        var generator = new OpenApiJMeterCodeGenerator(
-            swaggerFilePath,
-            outputDirectory,
-            new DefaultGeneralOptions(),
-            new ProcessLauncher(),
-            new DependencyInstaller(
-                new NpmInstaller(new ProcessLauncher()),
-                new FileDownloader(new WebDownloader())));
+        var workingDirectory = Path.GetDirectoryName(swaggerFilePath);
+        
+        RunProcess(
+            DotNetPathProvider.GetDotNetPath(),
+            $"tool new-manifest --output {workingDirectory}");
 
-        generator.GenerateCode(null);
+        RunProcess(
+            DotNetPathProvider.GetDotNetPath(),
+            "tool install rapicgen",
+            workingDirectory);
+
+        RunProcess(
+            "rapicgen",
+            $"jmeter {swaggerFilePath} {outputDirectory}");
+    }
+
+    private static void RunProcess(string filename, string arguments, string? workingDirectory = null)
+    {
+        using var process = new Process();
+        process.OutputDataReceived += (_, args) => Trace.WriteLine(args.Data);
+        process.ErrorDataReceived += (_, args) => Trace.WriteLine(args.Data);
+        process.StartInfo = new ProcessStartInfo
+        {
+            FileName = filename,
+            Arguments = arguments,
+        };
+        if (!string.IsNullOrWhiteSpace(workingDirectory))
+        {
+            process.StartInfo.WorkingDirectory = workingDirectory;
+        }
+        process.Start();
+        process.WaitForExit();
     }
 }
