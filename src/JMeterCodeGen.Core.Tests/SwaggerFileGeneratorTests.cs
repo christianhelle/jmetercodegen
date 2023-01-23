@@ -8,8 +8,7 @@ public class SwaggerFileGeneratorTests
     public void LaunchAndGetSwaggerFile_Returns_NotNull()
     {
         var csproj = TestFiles.Create();
-        var sut = new SwaggerFileGenerator();
-        var swaggerSpec = sut.LaunchAndGetSwaggerFile(csproj);
+        var swaggerSpec = SwaggerFileGenerator.LaunchAndGetSwaggerFile(csproj);
         Assert.NotNull(swaggerSpec);
     }
 }

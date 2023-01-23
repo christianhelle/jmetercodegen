@@ -3,22 +3,17 @@ using System.Net;
 
 namespace ChristianHelle.DeveloperTools.CodeGenerators.JMeter.Core;
 
-public class SwaggerFileGenerator
+public static class SwaggerFileGenerator
 {
-    public string LaunchAndGetSwaggerFile(string projectFilepath)
+    public static string LaunchAndGetSwaggerFile(string projectFilepath)
     {
-        var dotnet = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
-            "dotnet",
-            "dotnet.exe");
-
         var port = new Random().Next(50000, 59999);
         using var process = new Process();
         process.OutputDataReceived += (_, args) => Trace.WriteLine(args.Data);
         process.ErrorDataReceived += (_, args) => Trace.WriteLine(args.Data);
         process.StartInfo = new ProcessStartInfo
         {
-            FileName = dotnet,
+            FileName = DotNetPathProvider.GetDotNetPath(),
             Arguments = $"run --project {projectFilepath} --urls=http://localhost:{port}",
         };
         process.Start();
