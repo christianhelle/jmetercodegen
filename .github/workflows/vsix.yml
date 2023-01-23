@@ -27,8 +27,8 @@ jobs:
 
     - name: Update Version
       run: |
-        ((Get-Content -Path JMeterCodeGen.Core\JMeterCodeGen.Core.csproj -Raw) -Replace "1.0.0", "${{ env.VERSION }}") | Set-Content -Path Core/ApiClientCodeGen.Core/ApiClientCodeGen.Core.csproj
-        ((Get-Content -Path JMeterCodeGen.VSIX\source.extension.vsixmanifest -Raw) -Replace "1.0.0", "${{ env.VERSION }}") | Set-Content -Path VSIX/ApiClientCodeGen.VSIX.Dev17/source.extension.vsixmanifest
+        ((Get-Content -Path JMeterCodeGen.Core\JMeterCodeGen.Core.csproj -Raw) -Replace "1.0.0", "${{ env.VERSION }}") | Set-Content -Path JMeterCodeGen.Core\JMeterCodeGen.Core.csproj
+        ((Get-Content -Path JMeterCodeGen.VSIX\source.extension.vsixmanifest -Raw) -Replace "1.0.0", "${{ env.VERSION }}") | Set-Content -Path JMeterCodeGen.VSIX\source.extension.vsixmanifest
       working-directory: src
       shell: pwsh
 
