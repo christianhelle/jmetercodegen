@@ -9,6 +9,7 @@ public static class SwaggerFileGenerator
     {
         var port = new Random().Next(50000, 59999);
         using var process = new Process();
+        process.EnableRaisingEvents = true;
         process.OutputDataReceived += (_, args) => Trace.WriteLine(args.Data);
         process.ErrorDataReceived += (_, args) => Trace.WriteLine(args.Data);
         process.StartInfo = new ProcessStartInfo

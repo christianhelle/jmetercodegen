@@ -24,7 +24,8 @@ public static class JMeterScriptGenerator
 
     private static void RunProcess(string filename, string arguments, string? workingDirectory = null)
     {
-        using var process = new Process();
+        var process = new Process();
+        process.EnableRaisingEvents = true;
         process.OutputDataReceived += (_, args) => Trace.WriteLine(args.Data);
         process.ErrorDataReceived += (_, args) => Trace.WriteLine(args.Data);
         process.StartInfo = new ProcessStartInfo
@@ -32,10 +33,10 @@ public static class JMeterScriptGenerator
             FileName = filename,
             Arguments = arguments,
         };
+
         if (!string.IsNullOrWhiteSpace(workingDirectory))
-        {
             process.StartInfo.WorkingDirectory = workingDirectory;
-        }
+
         process.Start();
         process.WaitForExit();
     }
