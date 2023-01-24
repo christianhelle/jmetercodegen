@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensibility SDK", "Extens
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMeterCodeGen.VSIX", "JMeterCodeGen.VSIX\JMeterCodeGen.VSIX.csproj", "{1471E396-A2B1-4FDA-9F52-2FED27C01FC3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JMeterCodeGen.Core.Tests", "JMeterCodeGen.Core.Tests\JMeterCodeGen.Core.Tests.csproj", "{675506B4-B4AA-414B-B3D0-204AE7C41298}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,18 @@ Global
 		{1471E396-A2B1-4FDA-9F52-2FED27C01FC3}.Release|arm64.Build.0 = Release|arm64
 		{1471E396-A2B1-4FDA-9F52-2FED27C01FC3}.Release|x86.ActiveCfg = Release|x86
 		{1471E396-A2B1-4FDA-9F52-2FED27C01FC3}.Release|x86.Build.0 = Release|x86
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Debug|arm64.Build.0 = Debug|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Debug|x86.Build.0 = Debug|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Release|arm64.ActiveCfg = Release|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Release|arm64.Build.0 = Release|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Release|x86.ActiveCfg = Release|Any CPU
+		{675506B4-B4AA-414B-B3D0-204AE7C41298}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
