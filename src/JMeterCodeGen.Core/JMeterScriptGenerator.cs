@@ -21,14 +21,14 @@ public static class JMeterScriptGenerator
             "rapicgen",
             $"jmeter {swaggerFilePath} {outputDirectory}");
 
-        TryDeleteGeneratorIgnoreFile(workingDirectory);
+        TryDeleteGeneratorIgnoreFile(outputDirectory);
     }
 
-    private static void TryDeleteGeneratorIgnoreFile(string workingDirectory)
+    private static void TryDeleteGeneratorIgnoreFile(string outputDirectory)
     {
         try
         {
-            File.Delete(Path.Combine(workingDirectory, ".openapi-generator-ignore"));
+            File.Delete(Path.Combine(outputDirectory, ".openapi-generator-ignore"));
         }
         catch (Exception e)
         {
