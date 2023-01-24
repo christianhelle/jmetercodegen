@@ -12,8 +12,8 @@ public class JMeterScriptGeneratorTests
 
         var workingFolder = Path.GetDirectoryName(csproj)!;
         var outputFolder = Path.Combine(workingFolder, "Output");
-        
-        var swaggerFile = Path.Combine(workingFolder, "swagger.json");
+
+        var swaggerFile = Path.Combine(workingFolder, "Swagger.json");
         File.WriteAllText(swaggerFile, swaggerSpec);
 
         JMeterScriptGenerator.Generate(swaggerFile, outputFolder);

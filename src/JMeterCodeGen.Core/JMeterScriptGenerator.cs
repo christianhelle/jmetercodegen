@@ -7,7 +7,7 @@ public static class JMeterScriptGenerator
     public static void Generate(string swaggerFilePath, string outputDirectory)
     {
         var workingDirectory = Path.GetDirectoryName(swaggerFilePath);
-        
+
         RunProcess(
             DotNetPathProvider.GetDotNetPath(),
             $"tool new-manifest --output {workingDirectory}");
@@ -20,6 +20,20 @@ public static class JMeterScriptGenerator
         RunProcess(
             "rapicgen",
             $"jmeter {swaggerFilePath} {outputDirectory}");
+
+        TryDeleteGeneratorIgnoreFile(workingDirectory);
+    }
+
+    private static void TryDeleteGeneratorIgnoreFile(string workingDirectory)
+    {
+        try
+        {
+            File.Delete(Path.Combine(workingDirectory, ".openapi-generator-ignore"));
+        }
+        catch (Exception e)
+        {
+            Trace.WriteLine(e);
+        }
     }
 
     private static void RunProcess(string filename, string arguments, string? workingDirectory = null)
