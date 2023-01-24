@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using ChristianHelle.DeveloperTools.CodeGenerators.JMeter.Core;
 using Microsoft;
 using Microsoft.VisualStudio.Extensibility;
 using Microsoft.VisualStudio.Extensibility.Commands;
@@ -22,12 +23,11 @@ namespace ChristianHelle.DeveloperTools.CodeGenerators.JMeter.Extension
             this.traceSource = Requires.NotNull(traceSource, nameof(traceSource));
         }
 
-        public override Task ExecuteCommandAsync(IClientContext context, CancellationToken cancellationToken)
+        public override async Task ExecuteCommandAsync(IClientContext context, CancellationToken cancellationToken)
         {
             var activeProjectIdentifier = context["Shell.ActiveProjectIdentifier"];
             var activeSelectionPath = context["Shell.ActiveSelectionPath"];
-            traceSource.TraceInformation($"Hello from another process!");
-            return Task.CompletedTask;
+            await Task.Run(() => Generator.GenerateFromProject(activeSelectionPath));
         }
     }
 }
