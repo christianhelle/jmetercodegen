@@ -40,7 +40,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
 
     - name: Build
-      run: msbuild VSIX.sln /property:Configuration=Release /t:Rebuild
+      run: msbuild JMeterCodeGen.sln /property:Configuration=Release /t:Rebuild
       working-directory: src
 
     - name: Move build output
