@@ -16,7 +16,7 @@ public class JMeterScriptGeneratorTests
         var swaggerFile = Path.Combine(workingFolder, "Swagger.json");
         File.WriteAllText(swaggerFile, swaggerSpec);
 
-        JMeterScriptGenerator.GenerateAsync(swaggerFile, outputFolder);
+        await JMeterScriptGenerator.GenerateAsync(swaggerFile, outputFolder);
         Assert.NotEmpty(Directory.GetFiles(outputFolder));
     }
 }
