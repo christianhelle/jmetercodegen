@@ -89,7 +89,7 @@ namespace JMeterCodeGen.VSIX
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
             var project = await VS.Solutions.GetActiveProjectAsync();
-            await Task.Run(() => Generator.GenerateFromProject(project.FullPath));
+            await Generator.GenerateFromProjectAsync(project.FullPath);
         }
     }
 }
