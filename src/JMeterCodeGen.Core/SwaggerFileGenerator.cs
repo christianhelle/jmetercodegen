@@ -29,22 +29,24 @@ public static class SwaggerFileGenerator
 
         try
         {
-            while (true)
+            var attempts = 0;
+            string content = string.Empty;
+
+            using var client = new WebClient();
+            while (string.IsNullOrWhiteSpace(content) && attempts < 10)
             {
-                var request = WebRequest.Create($"http://localhost:{port}/swagger/v1/swagger.json");
-                request.Timeout = 120000;
-                using var response = request.GetResponse();
-                using var stream = response.GetResponseStream();
-                if (stream == null)
-                    continue;
-
-                using var reader = new StreamReader(stream);
-                var content = reader.ReadToEnd();
-                if (string.IsNullOrWhiteSpace(content))
-                    continue;
-
-                return content;
+                try
+                {
+                    content = client.DownloadString($"http://localhost:{port}/swagger/v1/swagger.json");
+                }
+                catch (WebException)
+                {
+                    attempts++;
+                    Thread.Sleep(1000);
+                }
             }
+
+            return content;
         }
         finally
         {
