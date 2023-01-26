@@ -1,11 +1,10 @@
 ﻿using System.Diagnostics;
-using System.Net;
 
 namespace ChristianHelle.DeveloperTools.CodeGenerators.JMeter.Core;
 
 public static class SwaggerFileGenerator
 {
-    public static string LaunchAndGetSwaggerFile(string projectFilepath)
+    public static async Task<string> LaunchAndGetSwaggerFile(string projectFilepath)
     {
         using var process = new Process();
         process.OutputDataReceived += (_, args) => Trace.WriteLine(args.Data);
@@ -31,15 +30,22 @@ public static class SwaggerFileGenerator
         {
             var attempts = 0;
             string content = string.Empty;
+            var url = $"http://localhost:{port}/swagger/v1/swagger.json";
 
-            using var client = new WebClient();
+            using var client = new HttpClient();
             while (string.IsNullOrWhiteSpace(content) && attempts < 10)
             {
                 try
                 {
-                    content = client.DownloadString($"http://localhost:{port}/swagger/v1/swagger.json");
+                    using var response = await client.GetAsync(url);
+                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        url = $"http://localhost:{port}/swagger/v1.0/swagger.json";
+                        continue;
+                    }
+                    content = await response.Content.ReadAsStringAsync();
                 }
-                catch (WebException)
+                catch (HttpRequestException e)
                 {
                     attempts++;
                     Thread.Sleep(1000);

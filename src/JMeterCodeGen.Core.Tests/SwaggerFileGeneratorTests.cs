@@ -5,10 +5,10 @@ namespace JMeterCodeGen.Core.Tests;
 public class SwaggerFileGeneratorTests
 {
     [Fact]
-    public void LaunchAndGetSwaggerFile_Returns_NotNull()
+    public async Task LaunchAndGetSwaggerFile_Returns_NotNullAsync()
     {
         var csproj = TestFiles.Create();
-        var swaggerSpec = SwaggerFileGenerator.LaunchAndGetSwaggerFile(csproj);
+        var swaggerSpec = await SwaggerFileGenerator.LaunchAndGetSwaggerFile(csproj);
         Assert.NotNull(swaggerSpec);
     }
 }
