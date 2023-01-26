@@ -45,7 +45,7 @@ jobs:
 
     - name: Move build output
       run: |
-        mv src/JMeterCodeGen.Core/bin/Release/JMeterCodeGen.VSIX.vsix JMeterCodeGen-${{ env.VERSION }}.vsix
+        mv src/JMeterCodeGen.VSIX/bin/Release/JMeterCodeGen.VSIX.vsix JMeterCodeGen-${{ env.VERSION }}.vsix
 
     - name: Publish artifacts
       uses: actions/upload-artifact@v2
