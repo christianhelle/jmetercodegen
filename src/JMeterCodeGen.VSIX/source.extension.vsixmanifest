@@ -4,6 +4,7 @@
         <Identity Id="f3647195-cbd0-4439-ab21-5dbc7a93867a" Version="1.0.0" Language="en-US" Publisher="Christian Resma Helle" />
         <DisplayName>JMeter Code Generator</DisplayName>
         <Description xml:space="preserve">Visual Studio extension for generating JMeter test plans from a ASP.NET Web API project</Description>
+        <Icon>Resources\Icon.png</Icon>
         <Preview>true</Preview>
     </Metadata>
     <Installation>
