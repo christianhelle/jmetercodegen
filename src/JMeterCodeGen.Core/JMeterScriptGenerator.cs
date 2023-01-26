@@ -39,19 +39,26 @@ public static class JMeterScriptGenerator
     private static void RunProcess(string filename, string arguments, string? workingDirectory = null)
     {
         var process = new Process();
-        process.EnableRaisingEvents = true;
         process.OutputDataReceived += (_, args) => Trace.WriteLine(args.Data);
         process.ErrorDataReceived += (_, args) => Trace.WriteLine(args.Data);
+
         process.StartInfo = new ProcessStartInfo
         {
             FileName = filename,
             Arguments = arguments,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            RedirectStandardInput = true,
+            UseShellExecute = false,
+            CreateNoWindow = true,
         };
 
         if (!string.IsNullOrWhiteSpace(workingDirectory))
             process.StartInfo.WorkingDirectory = workingDirectory;
 
         process.Start();
+        process.BeginErrorReadLine();
+        process.BeginOutputReadLine();
         process.WaitForExit();
     }
 }
