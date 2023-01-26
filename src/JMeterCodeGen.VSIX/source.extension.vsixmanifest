@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
         <Identity Id="f3647195-cbd0-4439-ab21-5dbc7a93867a" Version="1.0.0" Language="en-US" Publisher="Christian Resma Helle" />
-        <DisplayName>JMeter Code Generator</DisplayName>
+        <DisplayName>JMeter Test Plan Generator</DisplayName>
         <Description xml:space="preserve">Visual Studio extension for generating JMeter test plans from a ASP.NET Web API project</Description>
         <License>License.txt</License>
         <Icon>Resources\Icon.png</Icon>
