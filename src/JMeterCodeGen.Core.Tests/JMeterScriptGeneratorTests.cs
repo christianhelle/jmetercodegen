@@ -5,10 +5,10 @@ namespace JMeterCodeGen.Core.Tests;
 public class JMeterScriptGeneratorTests
 {
     [Fact]
-    public void Generate()
+    public async Task GenerateAsync()
     {
         var csproj = TestFiles.Create();
-        var swaggerSpec = SwaggerFileGenerator.LaunchAndGetSwaggerFile(csproj);
+        var swaggerSpec = await SwaggerFileGenerator.LaunchAndGetSwaggerFile(csproj);
 
         var workingFolder = Path.GetDirectoryName(csproj)!;
         var outputFolder = Path.Combine(workingFolder, "Output");
@@ -16,7 +16,7 @@ public class JMeterScriptGeneratorTests
         var swaggerFile = Path.Combine(workingFolder, "Swagger.json");
         File.WriteAllText(swaggerFile, swaggerSpec);
 
-        JMeterScriptGenerator.Generate(swaggerFile, outputFolder);
+        JMeterScriptGenerator.GenerateAsync(swaggerFile, outputFolder);
         Assert.NotEmpty(Directory.GetFiles(outputFolder));
     }
 }

@@ -4,20 +4,20 @@ namespace ChristianHelle.DeveloperTools.CodeGenerators.JMeter.Core;
 
 public static class JMeterScriptGenerator
 {
-    public static void Generate(string swaggerFilePath, string outputDirectory)
+    public static async Task GenerateAsync(string swaggerFilePath, string outputDirectory)
     {
         var workingDirectory = Path.GetDirectoryName(swaggerFilePath);
 
-        RunProcess(
+        await RunProcessAsync(
             DotNetPathProvider.GetDotNetPath(),
             $"tool new-manifest --output {workingDirectory}");
 
-        RunProcess(
+        await RunProcessAsync(
             DotNetPathProvider.GetDotNetPath(),
             "tool install rapicgen",
             workingDirectory);
 
-        RunProcess(
+        await RunProcessAsync(
             "rapicgen",
             $"jmeter {swaggerFilePath} {outputDirectory}");
 
@@ -35,6 +35,12 @@ public static class JMeterScriptGenerator
             Trace.WriteLine(e);
         }
     }
+
+    private static Task RunProcessAsync(
+        string filename,
+        string arguments,
+        string? workingDirectory = null) =>
+        Task.Run(() => RunProcess(filename, arguments, workingDirectory));
 
     private static void RunProcess(string filename, string arguments, string? workingDirectory = null)
     {
