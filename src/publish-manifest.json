@@ -8,7 +8,7 @@
     "overview": "../docs/Marketplace.md",
     "priceCategory": "free",
     "publisher": "ChristianResmaHelle",
-    "private": false,
+    "private": true,
     "qna": true,
     "repo": "https://github.com/christianhelle/jmetercodegen"
 }
