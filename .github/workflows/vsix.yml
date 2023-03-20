@@ -53,3 +53,12 @@ jobs:
         name: Artifacts
         path: |
           *.vsix
+
+    - name: Publish to Open VSIX Gallery
+      if: github.ref == 'refs/heads/master'
+      run: |
+        (new-object Net.WebClient).DownloadString("https://raw.github.com/madskristensen/ExtensionScripts/master/AppVeyor/vsix.ps1") | iex
+        Vsix-PushArtifacts
+        Vsix-PublishToGallery -path JMeterCodeGen-${{ env.VERSION }}.vsix -readmeUrl https://raw.githubusercontent.com/christianhelle/jmetercodegen/master/docs/Marketplace.md
+      shell: pwsh
+      continue-on-error: true
