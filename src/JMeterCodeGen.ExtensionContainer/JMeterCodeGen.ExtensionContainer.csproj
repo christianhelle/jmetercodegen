@@ -53,7 +53,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.10.2185" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.12.2069" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JMeterCodeGen.Extension\JMeterCodeGen.Extension.csproj">
