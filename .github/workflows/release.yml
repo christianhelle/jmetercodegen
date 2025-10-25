@@ -40,7 +40,7 @@ jobs:
       run: |
         mv src/JMeterCodeGen.VSIX/bin/Release/JMeterCodeGen.VSIX.vsix JMeterGenerator-${{ env.VERSION }}.vsix.vsix
     - name: Publish artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: Visual Studio Extension
         path: |
@@ -77,7 +77,7 @@ jobs:
         release_name: v${{ env.VERSION }}
         draft: true
         prerelease: false
-    - uses: actions/download-artifact@v5
+    - uses: actions/download-artifact@v6
       with:
         path: artifacts
     - name: Upload VSIX asset
